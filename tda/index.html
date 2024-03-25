@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Efficient Test-Time Adaptation of Vision-Language Models.">
+  <meta name="keywords" content="TDA, Efficient Test-Time Adaptation of Vision-Language Models, Training-Free Dynamic Adapter, Test-Time Adaptation, Vision-Language models, Foundation models, Efficient Test-Time adaptation">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Efficient Test-Time Adaptation of Vision-Language Models</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/efficient.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Efficient Test-Time Adaptation of Vision-Language Models</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=R7GNWu0AAAAJ&hl=en">Adilbek Karmanov</a><sup>1</sup><sup>*</sup></span>
+            &nbsp;
+            &nbsp; 
+            <span class="author-block">
+              <a href="https://dayan-guan.github.io/">Dayan Guan</a><sup>2</sup><sup>*</sup></span>
+            &nbsp;
+            &nbsp;
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?hl=en&user=uYmK-A0AAAAJ&view=en">Shijian Lu</a><sup>1,2</sup>
+            </span>
+            &nbsp;
+            &nbsp;
+            <span class="author-block">
+              <a href="https://scholar.google.ca/citations?user=VcOjgngAAAAJ&hl=en">Abdulmotaleb El Saddik</a><sup>1,3</sup>
+            </span>
+            &nbsp;
+            &nbsp;
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=5pKTRxEAAAAJ&hl=en">Eric Xing</a><sup>1,4</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Mohamed bin Zayed University of Artificial Intelligence</span>
+            &nbsp;
+            &nbsp;
+            <span class="author-block"><sup>2</sup>Nanyang Technological University</span>
+            &nbsp;
+            &nbsp;
+            <span class="author-block"><sup>3</sup>University of Ottawa</span>
+            &nbsp;
+            &nbsp;
+            <span class="author-block"><sup>4</sup>Carnegie Mellon University</span>
+            <br>
+            <p style="padding: 10px"></p>
+            <span style="font-weight: bold;">CVPR 2024</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/kdiAAA/TDA"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body" style="display: flex; justify-content: space-between; align-items: center;">
+      <div style="flex: 1; text-align: center; padding-right: 40px;">
+        <img src="static/images/PromptTuning.png" alt="First Image" style="width: 100%; max-width: 1000px;">
+        <h3 class="subtitle">(a) Test-time Prompt Tuning</h3>
+      </div>
+
+      <div style="border-left: 2px solid #000; height: 250px;"></div>
+
+      <div style="flex: 1; text-align: center; padding-left: 40px;">
+        <img src="static/images/TDA.png" alt="Second Image" style="width: 100%; max-width: 1000px;">
+        <h3 class="subtitle">(b) Training-free Dynamic Adapter (Ours)</h3>
+      </div>
+    </div>
+    
+    <div class="method-overview-text has-text-justified" style="font-size: 17.6px;">
+      <p>
+        <b>Comparison of our proposed Training-free Dynamic Adapter (TDA) with Test-time Prompt Tuning (TPT) and 
+          its enhancement DiffTPT</b>: both TPT and DiffTPT require significant computational resources to optimize the <i>learnable prompt</i> via backpropagation. 
+          TDA is a dynamic cache that is training-free without any backpropagation, making it efficient for test-time adaptation in various real-world scenarios.
+      </p>
+  </div>
+  </div>
+  <p style="padding: 15px"></p>
+</section>
+
+<section class="hero is-light is-small">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <p style="padding: 15px"></p>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Test-time adaptation with pre-trained vision-language models has attracted increasing attention for 
+            tackling distribution shifts during the test time. Though prior studies have achieved very promising performance, they involve intensive computation which is severely unaligned with test-time adaptation.
+          </p>
+          <p> 
+            We design TDA, a training-free dynamic adapter that enables effective and efficient test-time adaptation with vision-language models. TDA works with a lightweight key-value cache that maintains a dynamic queue with few-shot pseudo labels as values and the corresponding test-sample features as keys. 
+            Leveraging the key-value cache, TDA allows adapting to test data gradually via progressive pseudo label refinement which is super-efficient without incurring any backpropagation. 
+            In addition, we introduce negative pseudo labeling that alleviates the adverse impact of pseudo label noises by assigning pseudo labels to certain negative classes when the model is uncertain about its pseudo label predictions. 
+            Extensive experiments over two benchmarks demonstrate TDA’s superior effectiveness and efficiency as compared with the state-of-the-art.
+          </p>
+        </div>
+      </div>
+    </div>
+    <p style="padding: 15px"></p>
+</section>
+
+
+<section class="section">
+  <p style="padding: 15px"></p>
+  <div class="container is-max-desktop">
+    <div style="text-align: center; margin-bottom: 20px;">
+      <h2 class="title">Overview</h2>
+      <p style="padding: 15px"></p>
+      <img src="static/images/TDA-full.png" alt="Overview Image" style="width: 100%; max-width: 1000px; margin: auto;">
+      <p style="padding: 5px"></p>
+      <h3 class="subtitle">Overview of <b>T</b>raining-free <b>D</b>ynamic <b>A</b>dapter (<b>TDA</b>)</h3>
+      <p style="padding: 10px"></p>
+      <div class="method-overview-text" style="text-align: justify; margin: auto; max-width: 100%; font-size: 17.6px;">
+        <p>
+          <b>TDA</b> constructs and updates <b>two key-value caches</b> to store the knowledge of a stream of test samples, and uses the two caches to generate <b>positive</b> and <b>negative</b> predictions which are combined with CLIP predictions to produce the final prediction. 
+          Specifically, the CLIP predictions are generated by performing the dot product between the image features generated by CLIP's image encoder 
+          <span style="font-family: 'Times New Roman', Times, serif; font-style: italic; font-size: 20px;">E<sub>v</sub></span>
+          and the text embeddings generated by CLIP's text encoder 
+          <span style="font-family: 'Times New Roman', Times, serif; font-style: italic; font-size: 20px;">E<sub>t</sub></span> 
+          , using the hand-crafted prompt and class names. The two key-value caches are updated by gradually incorporating the test features and their corresponding pseudo labels calculated from CLIP's predictions, based on prediction entropy and cache capacity.
+        </p>
+        <br>
+      </div>
+    </div>
+    
+  </div>
+</section>
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="method-overview-text" style="text-align: justify; margin: auto; max-width: 100%; font-size: 17.6px;">
+      <h2 class="title" style="text-align: center;">TDA Efficiency and Adaptability</h2>
+      <p style="padding: 10px"></p>
+      <p>We evaluated <b>TDA</b> for its <b>efficiency</b> alongside other methods on the ImageNet dataset, 
+        focusing on both their performance and computational requirements during test time adaptation. 
+        The table below showcases our findings.</p>
+    </div>
+  <p style="padding: 20px"></p>
+    <div class="table-container" style="text-align: center;">
+    <table class="subtitle" style="width:80%; margin-left:auto; margin-right:auto;">
+      <caption class="subtitle" style="caption-side: bottom; text-align: center; padding-top: 15px;"><b>Comparisons in terms of efficiency and effectiveness on ImageNet</b></caption>
+        <tbody>
+          <tr><td colspan="4" style="border-bottom: 2px solid #ddd;"></td></tr>
+            <tr>
+                <th style="padding: 10px;">Models</th>
+                <th style="padding: 10px;">Testing Time</th>
+                <th style="padding: 10px;">Accuracy</th>
+                <th style="padding: 10px;">Gain</th>
+            </tr>
+            <tr><td colspan="4" style="border-bottom: 2px solid #ddd;"></td></tr>
+            <tr>
+                <td style="padding: 10px;"><a href="https://arxiv.org/abs/2103.00020">CLIP-ResNet-50</a></td>
+                <td style="padding: 10px;">12min</td>
+                <td style="padding: 10px;">59.81</td>
+                <td style="padding: 10px;">0</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px;"><a href="https://arxiv.org/abs/2209.07511">TPT</a></td>
+                <td style="padding: 10px;">12h 50min</td>
+                <td style="padding: 10px;">60.74</td>
+                <td style="padding: 10px;">+0.93</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px;"><a href="https://arxiv.org/abs/2308.06038">DiffTPT</a></td>
+                <td style="padding: 10px;">34h 45min</td>
+                <td style="padding: 10px;">60.80</td>
+                <td style="padding: 10px;">+0.99</td>
+            </tr>
+            <tr style="background-color:#e6e6e6">
+                <td style="padding: 10px;"><b>TDA (Ours)</b></td>
+                <td style="padding: 10px;"><b>16min</b></td>
+                <td style="padding: 10px;"><b>61.35</b></td>
+                <td style="padding: 10px;"><b>+1.54</b></td>
+            </tr>
+        </tbody>    
+    </table>
+  </div>
+<p style="padding: 15px"></p>
+<div class="method-overview-text" style="text-align: justify; margin: auto; max-width: 100%; font-size: 17.6px;">
+<p>
+  Our study further assesses <b>TDA</b> against two primary benchmarks. Initially, we evaluate the model's 
+  robustness using the <b>out-of-distribution (OOD) benchmark</b> across four ImageNet-derived datasets. 
+  Following this, we explore its adaptability and generalization capabilities through the <b>cross-domain benchmark</b> 
+  over ten diverse image classification datasets. The results of our comprehensive evaluation are detailed in the table below:
+</p>
+</div>
+<p style="padding: 15px"></p>
+<div class="table-container is-max-desktop" style="text-align: center;">
+  <table class="subtitle" style="width:100%; margin-left:auto; margin-right:auto;">
+    <caption class="subtitle" style="caption-side: bottom; text-align: center; padding-top: 15px;"><b>OOD Benchmark</b></caption>
+      <tbody>
+          <tr><td colspan="8" style="border-bottom: 2px solid #ddd;"></td></tr>
+          <tr>
+              <th style="padding: 12px 6px;">Method</th>
+              <th style="padding: 12px 6px;">ImageNet (IN)</th>
+              <th style="padding: 12px 6px;">IN-A</th>
+              <th style="padding: 12px 6px;">IN-V2</th>
+              <th style="padding: 12px 6px;">IN-R</th>
+              <th style="padding: 12px 6px;">IN-S</th>
+              <th style="padding: 12px 6px;">Average</th>
+              <th style="padding: 12px 6px;">OOD Average</th>
+          </tr>
+          <tr><td colspan="8" style="border-bottom: 2px solid #ddd;"></td></tr>
+          <tr>
+              <td style="padding: 12px 6px;"><a href="https://arxiv.org/abs/2103.00020">CLIP-ResNet-50</a></td>
+              <td style="padding: 12px 6px;">59.81</td>
+              <td style="padding: 12px 6px;">23.24</td>
+              <td style="padding: 12px 6px;">52.91</td>
+              <td style="padding: 12px 6px;">60.72</td>
+              <td style="padding: 12px 6px;">35.48</td>
+              <td style="padding: 12px 6px;">46.43</td>
+              <td style="padding: 12px 6px;">43.09</td>
+          </tr>
+          <tr>
+              <td style="padding: 12px 6px;"><a href="https://arxiv.org/abs/2109.01134">CoOp</a></td>
+              <td style="padding: 12px 6px;"><strong>63.33</strong></td>
+              <td style="padding: 12px 6px;">23.06</td>
+              <td style="padding: 12px 6px;">55.40</td>
+              <td style="padding: 12px 6px;">56.60</td>
+              <td style="padding: 12px 6px;">34.67</td>
+              <td style="padding: 12px 6px;">46.61</td>
+              <td style="padding: 12px 6px;">42.43</td>
+          </tr>
+          <tr>
+              <td style="padding: 12px 6px;"><a href="https://arxiv.org/abs/2203.05557">CoCoOp</a></td>
+              <td style="padding: 12px 6px;">62.81</td>
+              <td style="padding: 12px 6px;">23.32</td>
+              <td style="padding: 12px 6px;">55.72</td>
+              <td style="padding: 12px 6px;">57.74</td>
+              <td style="padding: 12px 6px;">34.48</td>
+              <td style="padding: 12px 6px;">46.81</td>
+              <td style="padding: 12px 6px;">42.82</td>
+          </tr>
+          <tr>
+              <td style="padding: 12px 6px;"><a href="https://arxiv.org/abs/2111.03930">Tip-Adapter</a></td>
+              <td style="padding: 12px 6px;">62.03</td>
+              <td style="padding: 12px 6px;">23.13</td>
+              <td style="padding: 12px 6px;">53.97</td>
+              <td style="padding: 12px 6px;">60.35</td>
+              <td style="padding: 12px 6px;">35.74</td>
+              <td style="padding: 12px 6px;">47.04</td>
+              <td style="padding: 12px 6px;">43.30</td>
+          </tr>
+          <tr>
+              <td style="padding: 12px 6px;"><a href="https://arxiv.org/abs/2209.07511">TPT</a></td>
+              <td style="padding: 12px 6px;">60.74</td>
+              <td style="padding: 12px 6px;">26.67</td>
+              <td style="padding: 12px 6px;">54.70</td>
+              <td style="padding: 12px 6px;">59.11</td>
+              <td style="padding: 12px 6px;">35.09</td>
+              <td style="padding: 12px 6px;">47.26</td>
+              <td style="padding: 12px 6px;">43.89</td>
+          </tr>
+          <tr>
+              <td style="padding: 12px 6px;"><a href="https://arxiv.org/abs/2308.06038">DiffTPT</a></td>
+              <td style="padding: 12px 6px;">60.80</td>
+              <td style="padding: 12px 6px;"><strong>31.06</strong></td>
+              <td style="padding: 12px 6px;"><strong>55.80</strong></td>
+              <td style="padding: 12px 6px;">58.80</td>
+              <td style="padding: 12px 6px;">37.10</td>
+              <td style="padding: 12px 6px;">48.71</td>
+              <td style="padding: 12px 6px;">45.69</td>
+          </tr>
+          <tr style="background-color:#e6e6e6">
+              <td style="padding: 12px 6px;"><b>TDA (Ours)</b></td>
+              <td style="padding: 12px 6px;">61.35</td>
+              <td style="padding: 12px 6px;">30.29</td>
+              <td style="padding: 12px 6px;">55.54</td>
+              <td style="padding: 12px 6px;"><strong>62.58</strong></td>
+              <td style="padding: 12px 6px;"><strong>38.12</strong></td>
+              <td style="padding: 12px 6px;"><strong>49.58</strong></td>
+              <td style="padding: 12px 6px;"><strong>46.63</strong></td>
+          </tr>
+      </tbody>
+  </table>
+</div>
+
+<p style="padding: 15px"></p>
+
+<div class="table-container is-max-desktop" style="text-align: center;">
+  <table class="subtitle" style="width:100%; margin-left:auto; margin-right:auto; caption-side: bottom;">
+    <caption class="subtitle" style="caption-side: bottom; text-align: center; padding-top: 15px;"><b>Cross-Domain Benchmark</b></caption>
+      <tbody>
+          <tr><td colspan="12" style="border-bottom: 2px solid #ddd;"></td></tr>
+          <tr>
+              <th style="padding: 12px 6px;">Method</th>
+              <th style="padding: 12px 6px;">Aircraft</th>
+              <th style="padding: 12px 6px;">Caltech</th>
+              <th style="padding: 12px 6px;">Cars</th>
+              <th style="padding: 12px 6px;">DTD</th>
+              <th style="padding: 12px 6px;">EuroSAT</th>
+              <th style="padding: 12px 6px;">Flowers</th>
+              <th style="padding: 12px 6px;">Food101</th>
+              <th style="padding: 12px 6px;">Pets</th>
+              <th style="padding: 12px 6px;">SUN397</th>
+              <th style="padding: 12px 6px;">UCF101</th>
+              <th style="padding: 12px 6px;">Average</th>
+          </tr>
+          <tr><td colspan="12" style="border-bottom: 2px solid #ddd;"></td></tr>
+          <tr>
+              <td style="padding: 12px 6px;"><a href="https://arxiv.org/abs/2103.00020">CLIP-ResNet-50</a></td>
+              <td style="padding: 12px 6px;">16.11</td>
+              <td style="padding: 12px 6px;">87.26</td>
+              <td style="padding: 12px 6px;">55.89</td>
+              <td style="padding: 12px 6px;">40.37</td>
+              <td style="padding: 12px 6px;">25.79</td>
+              <td style="padding: 12px 6px;">62.77</td>
+              <td style="padding: 12px 6px;">74.82</td>
+              <td style="padding: 12px 6px;">82.97</td>
+              <td style="padding: 12px 6px;">60.85</td>
+              <td style="padding: 12px 6px;">59.48</td>
+              <td style="padding: 12px 6px;">56.63</td>
+          </tr>
+          <tr>
+            <td style="padding: 12px 6px;"><a href="https://arxiv.org/abs/2109.01134">CoOp</a></td>
+            <td style="padding: 12px 6px;">15.12</td>
+            <td style="padding: 12px 6px;">86.53</td>
+            <td style="padding: 12px 6px;">55.32</td>
+            <td style="padding: 12px 6px;">37.29</td>
+            <td style="padding: 12px 6px;">26.20</td>
+            <td style="padding: 12px 6px;">61.55</td>
+            <td style="padding: 12px 6px;">75.59</td>
+            <td style="padding: 12px 6px;">87.00</td>
+            <td style="padding: 12px 6px;">58.15</td>
+            <td style="padding: 12px 6px;">59.05</td>
+            <td style="padding: 12px 6px;">56.18</td>
+          </tr>
+          <tr>
+            <td style="padding: 12px 6px;"><a href="https://arxiv.org/abs/2203.05557">CoCoOp</a></td>
+            <td style="padding: 12px 6px;">14.61</td>
+            <td style="padding: 12px 6px;">87.38</td>
+            <td style="padding: 12px 6px;">56.22</td>
+            <td style="padding: 12px 6px;">38.53</td>
+            <td style="padding: 12px 6px;">28.73</td>
+            <td style="padding: 12px 6px;">65.57</td>
+            <td style="padding: 12px 6px;">76.20</td>
+            <td style="padding: 12px 6px;"><strong>88.39</strong></td>
+            <td style="padding: 12px 6px;">59.61</td>
+            <td style="padding: 12px 6px;">57.10</td>
+            <td style="padding: 12px 6px;">57.23</td>
+          </tr>
+          <tr>
+            <td style="padding: 12px 6px;"><a href="https://arxiv.org/abs/2209.07511">TPT</a></td>
+            <td style="padding: 12px 6px;">17.58</td>
+            <td style="padding: 12px 6px;">87.02</td>
+            <td style="padding: 12px 6px;">58.46</td>
+            <td style="padding: 12px 6px;">40.84</td>
+            <td style="padding: 12px 6px;">28.33</td>
+            <td style="padding: 12px 6px;">62.69</td>
+            <td style="padding: 12px 6px;">74.88</td>
+            <td style="padding: 12px 6px;">84.49</td>
+            <td style="padding: 12px 6px;">61.46</td>
+            <td style="padding: 12px 6px;">60.82</td>
+            <td style="padding: 12px 6px;">57.66</td>
+        </tr>
+        <tr>
+            <td style="padding: 12px 6px;"><a href="https://arxiv.org/abs/2308.06038">DiffTPT</a></td>
+            <td style="padding: 12px 6px;">17.60</td>
+            <td style="padding: 12px 6px;">86.89</td>
+            <td style="padding: 12px 6px;"><strong>60.71</strong></td>
+            <td style="padding: 12px 6px;">40.72</td>
+            <td style="padding: 12px 6px;">41.04</td>
+            <td style="padding: 12px 6px;">63.53</td>
+            <td style="padding: 12px 6px;"><strong>79.21</strong></td>
+            <td style="padding: 12px 6px;">83.40</td>
+            <td style="padding: 12px 6px;"><strong>62.72</strong></td>
+            <td style="padding: 12px 6px;">62.67</td>
+            <td style="padding: 12px 6px;">59.85</td>
+        </tr>
+        <tr style="background-color:#e6e6e6">
+            <td style="padding: 12px 6px;"><b>TDA (Ours)</b></td>
+            <td style="padding: 12px 6px;"><strong>17.61</strong></td>
+            <td style="padding: 12px 6px;"><strong>89.70</strong></td>
+            <td style="padding: 12px 6px;">57.78</td>
+            <td style="padding: 12px 6px;"><strong>43.74</strong></td>
+            <td style="padding: 12px 6px;"><strong>42.11</strong></td>
+            <td style="padding: 12px 6px;"><strong>68.74</strong></td>
+            <td style="padding: 12px 6px;">77.75</td>
+            <td style="padding: 12px 6px;">86.18</td>
+            <td style="padding: 12px 6px;">62.53</td>
+            <td style="padding: 12px 6px;"><strong>64.18</strong></td>
+            <td style="padding: 12px 6px;"><strong>61.03</strong></td>
+        </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+</div>
+</section>
+
+<p style="padding: 20px"></p>
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>
+</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p style="text-align: center;">
+            This page was built using <a
+              href="https://github.com/nerfies/nerfies.github.io">this template</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
