@@ -653,7 +653,6 @@ span.highlight {
 .paper-media {
   width: 100%;
   border-radius: 18px;
-  overflow: hidden;
 }
 
 .paper-media-link {
@@ -678,29 +677,27 @@ span.highlight {
   display: block;
   object-fit: contain;
   border-radius: 18px;
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.1);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.12);
+  transition: box-shadow 0.25s ease;
 }
 
 .paper-video {
   width: 100%;
   border-radius: 18px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.14);
   border: 1px solid rgba(0, 0, 0, 0.1);
   display: block;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: box-shadow 0.25s ease;
 }
 
 .paper-media-link:hover .paper-video,
 .paper-media-link:focus-visible .paper-video {
-  transform: translateY(-6px);
-  box-shadow: 0 28px 50px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 26px 48px rgba(0, 0, 0, 0.18);
 }
 
 .paper-media-link:hover .paper-image,
 .paper-media-link:focus-visible .paper-image {
-  transform: translateY(-6px);
-  box-shadow: 0 22px 44px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
 }
 
 .paper-title-link {
@@ -737,6 +734,7 @@ span.highlight {
 
 .demos-section .paper-media-wrapper {
   width: 100%;
+  max-width: 360px;
 }
 
 .demo-media-link {
@@ -757,11 +755,11 @@ span.highlight {
 
 .demo-thumbnail {
   width: 100%;
-  max-width: 560px;
+  max-width: 100%;
   border-radius: 18px;
   aspect-ratio: 16 / 9;
   object-fit: cover;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+  transition: box-shadow 0.25s ease;
   display: block;
 }
 
@@ -789,8 +787,7 @@ span.highlight {
 
 .demo-media-link:hover .demo-thumbnail,
 .demo-media-link:focus-visible .demo-thumbnail {
-  box-shadow: 0 28px 50px rgba(0, 0, 0, 0.18);
-  filter: brightness(0.8);
+  box-shadow: 0 30px 56px rgba(0, 0, 0, 0.2);
 }
 
 .demo-media-link:hover .demo-cta,
@@ -798,15 +795,15 @@ span.highlight {
   opacity: 1;
 }
 
-@media (max-width: 800px) {
+@media (min-width: 641px) and (max-width: 800px) {
   .intro-card {
     padding: 28px 24px;
   }
 
   .name {
-    font-size: 40px;
-    text-align: left;
-    font-weight: 600;
+    font-size: 49px;
+    text-align: center;
+    font-weight: 1200;
   }
 
   .intro-links {
@@ -879,9 +876,8 @@ span.highlight {
   }
 
   .demos-section .paper-media-wrapper {
-    width: auto;
-    flex: 2 1 0;
-    margin-right: 40px;
+    width: 360px;
+    margin-right: 36px;
   }
 
   .demos-section .paper-body {
