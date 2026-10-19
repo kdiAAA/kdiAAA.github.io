@@ -166,6 +166,15 @@ h2 {
   color: var(--fg-color);
 }
 
+/* Little dancing robot next to the name (animation lives inside the SVG) */
+.name-robot {
+  display: inline-block;
+  height: 1.15em;
+  width: auto;
+  margin-left: 0.25em;
+  vertical-align: -0.2em;
+}
+
 .name {
   padding-top: 0;
   margin: 0;
@@ -299,17 +308,40 @@ span.highlight {
 }
 
 .intro-photo .profile-wrapper {
+  position: relative;
   width: 100%;
-  max-width: 260px;
+  max-width: 280px;
+}
+
+/* Yellow glow hugging the sky part of the photo: even along the top edge and the
+   upper sides, fading out by the time it reaches the head */
+.intro-photo .profile-wrapper::before {
+  content: "";
+  position: absolute;
+  left: -6px;
+  right: -6px;
+  top: -6px;
+  height: 58%;
+  border-radius: 22px;
+  /* Holds steady down the whole sky (top ~40% of the photo), then fades out */
+  background: linear-gradient(to bottom,
+    rgba(255, 214, 70, 0.5) 0%,
+    rgba(255, 214, 70, 0.45) 45%,
+    rgba(255, 214, 70, 0.3) 65%,
+    rgba(255, 214, 70, 0.12) 82%,
+    rgba(255, 214, 70, 0) 100%);
+  filter: blur(18px);
+  pointer-events: none;
+  z-index: 0;
 }
 
 .profile-photo {
   width: 100%;
-  max-width: 240px;
   display: block;
   margin: 0 auto;
   border-radius: 18px;
-  box-shadow: 0 18px 32px rgba(0, 0, 0, 0.12);
+  position: relative;
+  z-index: 1;
 }
 
 .profile-wrapper {
@@ -885,14 +917,58 @@ span.highlight {
     justify-content: center;
   }
 }
+/* Bio: baby-blue links with a yellow highlight (deepened enough to read on white) */
 .intro-text p:not(.intro-links) a {
-  color: var(--accent-color);
+  color: #2f7fc1;
+  /* No 500 weight in the font; a hairline stroke thickens it slightly without going full bold */
+  -webkit-text-stroke: 0.3px currentColor;
   box-shadow: inset 0 -6px 0 rgba(255, 221, 50, 0.35);
   transition: color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .intro-text p:not(.intro-links) a:hover,
 .intro-text p:not(.intro-links) a:focus {
-  color: var(--accent-hover-color);
+  color: #1f66a3;
   box-shadow: inset 0 -100px 0 rgba(255, 221, 50, 0.2);
+}
+
+/* Resume, publications & demos: no outer panel, each card stands on its own */
+.section-block.resume-section,
+.section-block.publications-section,
+.section-block.demos-section {
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+}
+
+/* Experience and Education each get their own card, split 50/50 */
+.resume-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 26px;
+}
+
+@media (max-width: 800px) {
+  .resume-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Titles sit outside; the list below each title is the card */
+.resume-column {
+  gap: 10px;
+}
+
+.resume-column .resume-list {
+  flex: 1;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 18px;
+  padding: 24px 32px;
+}
+
+@media (max-width: 640px) {
+  .resume-column .resume-list {
+    padding: 20px 18px;
+  }
 }
